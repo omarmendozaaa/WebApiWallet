@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using WebApiWallet.Contexts;
+using WebApiWallet.Models;
 
 namespace WebApiWallet
 {
@@ -27,6 +30,11 @@ namespace WebApiWallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationSecurityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationSecurityDbContext>()
+            .AddDefaultTokenProviders();
+            services.AddResponseCaching();
 
             services.AddControllers();
 
@@ -57,6 +65,8 @@ namespace WebApiWallet
             {
                 endpoints.MapControllers();
             });
+            app.UseResponseCaching();
+            app.UseMvc();
         }
     }
 }

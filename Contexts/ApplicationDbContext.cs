@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebApiWallet.Entities;
+using WebApiWallet.Models;
 
-namespace WebApiWallet
+namespace WebApiWallet.Contexts
 {
     public class ApplicationDbContext : DbContext
     {
