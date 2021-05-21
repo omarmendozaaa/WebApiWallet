@@ -17,7 +17,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebApiWallet.Contexts;
+using WebApiWallet.Entities;
 using WebApiWallet.Models;
+using WebApiWallet.Models.Creacion;
 
 namespace WebApiWallet
 {
@@ -33,6 +35,30 @@ namespace WebApiWallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper( configuration => {
+                configuration.CreateMap<Analisis,AnalisisCreacionDTO>();
+                configuration.CreateMap<Cartera,CarteraCreacionDTO>();
+                configuration.CreateMap<Costes_fin,Costes_finCreacionDTO>();
+                configuration.CreateMap<Costes_ini,Costes_iniCreacionDTO>();
+                configuration.CreateMap<Costos_gastos,Costos_gastosCreacionDTO>();
+                configuration.CreateMap<Empresa,EmpresaCreacionDTO>();
+                configuration.CreateMap<Factura,FacturaCreacionDTO>();
+                configuration.CreateMap<Letra,LetraCreacionDTO>();
+                configuration.CreateMap<Recibo,ReciboCreacionDTO>();
+                configuration.CreateMap<Tasa,TasaCreacionDTO>();
+
+                configuration.CreateMap<Analisis,AnalisisCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Cartera,CarteraCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costes_fin,Costes_finCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costes_ini,Costes_iniCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costos_gastos,Costos_gastosCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Empresa,EmpresaCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Factura,FacturaCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Letra,LetraCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Recibo,ReciboCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Tasa,TasaCreacionDTO>().ReverseMap();
+            }, typeof(Startup));
+
             services.AddCors();
             services.AddDbContext<ApplicationSecurityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()

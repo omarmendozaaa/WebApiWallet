@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Creacion
 {
     public class AnalisisCreacionDTO
     {

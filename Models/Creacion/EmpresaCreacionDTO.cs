@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiWallet.Models.Creacion;
 using WebApiWallet.Validations;
 
 namespace WebApiWallet.Entities
@@ -19,8 +20,7 @@ namespace WebApiWallet.Entities
         [PesoArchivoValidacion(PesoMaximoEnMegaBytes: 4)]
         [TipoArchivoValidacion(grupoTipoArchivo: GrupoTipoArchivo.Imagen)]
         public IFormFile Logo { get; set; }
-        public Usuario Usuario { get; set; }
-        [Required]
-        public int UsuarioId { get; set; }
+        
+        public CarteraCreacionDTO Cartera { get; set; }
     }
 }

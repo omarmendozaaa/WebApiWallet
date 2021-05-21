@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Vista
 {
-    public class Costes_iniCreacionDTO
+    public class Costes_iniDTO
     {
         [Required]
         public string motivo { get; set; }

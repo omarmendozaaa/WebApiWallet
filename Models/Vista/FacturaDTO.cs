@@ -2,10 +2,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Vista
 {
-    public class FacturaCreacionDTO
+    public class FacturaDTO
     {
+
         [Required]
         public DateTime fecha_emision { get; set; }
         [Required]
@@ -15,12 +16,11 @@ namespace WebApiWallet.Entities
         [Required]
         public double retencion { get; set; }
 
-        
 
-        public CarteraCreacionDTO Cartera { get; set; }
-        public TasaCreacionDTO Tasa { get; set; }
-        public AnalisisCreacionDTO Analisis { get; set; }
-        public Costos_gastosCreacionDTO Costos_gastos { get; set; }
+        public CarteraDTO Cartera { get; set; }
+        public TasaDTO Tasa { get; set; }
+        public AnalisisDTO Analisis { get; set; }
+        public Costos_gastosDTO Costos_gastos { get; set; }
         
     }
 }

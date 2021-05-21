@@ -2,18 +2,17 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Creacion
 {
-    public class ReciboCreacionDTO
+    public class LetraCreacionDTO
     {
         [Required]
-        public DateTime fecha_emision { get; set; }
+        public DateTime fecha_giro { get; set; }
         [Required]
-        public DateTime fecha_pago { get; set; }
+        public DateTime fecha_vencimiento { get; set; }
         [Required]
-        public double total_recibir { get; set; }
+        public double valor_Nom { get; set; }
         public double retencion { get; set; }
-
 
         public CarteraCreacionDTO Cartera { get; set; }
         public TasaCreacionDTO Tasa { get; set; }

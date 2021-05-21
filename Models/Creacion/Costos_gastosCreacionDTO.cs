@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Creacion
 {
     public class Costos_gastosCreacionDTO
     {

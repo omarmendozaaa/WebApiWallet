@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiWallet.Validations;
 
-namespace WebApiWallet.Entities
+namespace WebApiWallet.Models.Vista
 {
-    public class Empresa
+    public class EmpresaDTO
     {
-        public int Id { get; set; }
         public string ruc { get; set; }
         [Required]
         public string razonSocial { get; set; }
@@ -17,14 +16,8 @@ namespace WebApiWallet.Entities
         public string departamento { get; set; }
         public string provincia { get; set; }
         public string distrito { get; set; }
-        public string Logo { get; set; }
-
         
-        public Cartera Cartera { get; set; }
-        public Usuario Usuario { get; set; }
-        [Required]
-        public int UsuarioId { get; set; }
-        [Required]
-        public int CarteraId { get; set; }
+        //por ver logo
+        public CarteraDTO Cartera { get; set; }
     }
 }
