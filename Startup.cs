@@ -66,7 +66,6 @@ namespace WebApiWallet
                 endpoints.MapControllers();
             });
             app.UseResponseCaching();
-            app.UseMvc();
         }
     }
 }
