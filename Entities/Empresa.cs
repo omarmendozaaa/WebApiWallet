@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiWallet.Validations;
@@ -18,6 +19,7 @@ namespace WebApiWallet.Entities
         public string distrito { get; set; }
         [PesoArchivoValidacion(PesoMaximoEnMegaBytes: 4)]
         [TipoArchivoValidacion(grupoTipoArchivo: GrupoTipoArchivo.Imagen)]
+        [NotMapped]
         public IFormFile Logo { get; set; }
 
         

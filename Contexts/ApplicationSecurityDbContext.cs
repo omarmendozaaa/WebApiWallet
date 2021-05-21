@@ -7,7 +7,7 @@ namespace WebApiWallet.Contexts
 {
     public class ApplicationSecurityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationSecurityDbContext(DbContextOptions options) : base(options)
+        public ApplicationSecurityDbContext(DbContextOptions<ApplicationSecurityDbContext> options) : base(options)
         {
 
         }
