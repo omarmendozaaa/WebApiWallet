@@ -19,12 +19,15 @@ namespace WebApiWallet.Entities
 
         public Cartera Cartera { get; set; }
         public Tasa Tasa { get; set; }
+        public Analisis Analisis { get; set; }
         public Costos_gastos Costos_gastos { get; set; }
 
         [Required]
         public int CarteraId { get; set; }
         [Required]
         public int TasaId { get; set; }
+        [Required]
+        public int AnalisisId { get; set; }
         [Required]
         public int Costos_gastosId { get; set; }
     }

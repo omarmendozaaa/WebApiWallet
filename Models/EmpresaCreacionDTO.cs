@@ -6,9 +6,8 @@ using WebApiWallet.Validations;
 
 namespace WebApiWallet.Entities
 {
-    public class Empresa
+    public class EmpresaCreacionDTO
     {
-        public int Id { get; set; }
         public string ruc { get; set; }
         [Required]
         public string razonSocial { get; set; }
@@ -19,9 +18,7 @@ namespace WebApiWallet.Entities
         public string distrito { get; set; }
         [PesoArchivoValidacion(PesoMaximoEnMegaBytes: 4)]
         [TipoArchivoValidacion(grupoTipoArchivo: GrupoTipoArchivo.Imagen)]
-        public string Logo { get; set; }
-
-        
+        public IFormFile Logo { get; set; }
         public Usuario Usuario { get; set; }
         [Required]
         public int UsuarioId { get; set; }
