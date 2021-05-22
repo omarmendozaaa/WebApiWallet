@@ -9,16 +9,16 @@ using WebApiWallet.Entities;
 using WebApiWallet.Models.Creacion;
 using WebApiWallet.Models.Vista;
 
-namespace WebApiModulo5.Controllers
+namespace WebApiWallet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutoresController : ControllerBase
+    public class AnalisisController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public AutoresController(ApplicationDbContext context, IMapper mapper)
+        public AnalisisController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

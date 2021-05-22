@@ -41,7 +41,7 @@ namespace WebApiWallet.Controllers
             }
             else
             {
-                return BadRequest("El usuario o contraseña es incorrecto");
+                return BadRequest("Ya existe una cuenta con este correo electrónico");
             }
         }
         [HttpPost("Login")]
@@ -53,7 +53,7 @@ namespace WebApiWallet.Controllers
                 return BuildToken(userInfo);
             }else
             {
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt.");
+                ModelState.AddModelError(string.Empty, "El usuario o contraseña es incorrecto");
                 return BadRequest(ModelState);
             }
         }
