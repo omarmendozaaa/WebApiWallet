@@ -45,8 +45,11 @@ namespace WebApiWallet.Controllers
             }
         }
         [HttpPost("Login")]
-        public async Task<ActionResult<UserToken>> Login([FromBody] UserInfo userInfo)
-        {
+        public async Task<ActionResult<UserToken>> Login([FromBody] UserInfoLogin userInfologin)
+        {   
+            var userInfo = new UserInfo();
+            userInfo.Email = userInfologin.Email;
+            userInfo.Password = userInfologin.Password;
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Password, isPersistent: false, lockoutOnFailure: false);
             if (result.Succeeded)
             {

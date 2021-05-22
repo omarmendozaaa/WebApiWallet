@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiWallet.Contexts;
 
 namespace WebApiWallet.Migrations
 {
     [DbContext(typeof(ApplicationSecurityDbContext))]
-    partial class ApplicationSecurityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210522064040_updateuserinfo")]
+    partial class updateuserinfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

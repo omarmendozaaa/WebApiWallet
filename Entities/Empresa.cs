@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiWallet.Models;
 using WebApiWallet.Validations;
 
 namespace WebApiWallet.Entities
@@ -21,7 +22,8 @@ namespace WebApiWallet.Entities
 
         
         public Cartera Cartera { get; set; }
-        public Usuario Usuario { get; set; }
+        public ApplicationUser Usuario { get; set; }
+        
         [Required]
         public int UsuarioId { get; set; }
         [Required]
