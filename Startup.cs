@@ -20,6 +20,7 @@ using WebApiWallet.Contexts;
 using WebApiWallet.Entities;
 using WebApiWallet.Models;
 using WebApiWallet.Models.Creacion;
+using WebApiWallet.Services;
 
 namespace WebApiWallet
 {
@@ -35,6 +36,7 @@ namespace WebApiWallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
             services.AddAutoMapper( configuration => {
                 configuration.CreateMap<Analisis,AnalisisCreacionDTO>();
                 configuration.CreateMap<Cartera,CarteraCreacionDTO>();

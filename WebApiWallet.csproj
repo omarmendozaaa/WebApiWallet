@@ -9,5 +9,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0-preview.3.21201.13"/>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0-preview.3.21201.13"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1"/>
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.2.3"/>
   </ItemGroup>
 </Project>
