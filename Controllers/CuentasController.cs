@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using WebApiWallet.Models;
+using WebApiWallet.Models.Vista;
 
 namespace WebApiWallet.Controllers
 {
@@ -21,17 +23,30 @@ namespace WebApiWallet.Controllers
         private readonly UserManager<ApplicationUser> _userManger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly IMapper mapper;
 
         public CuentasControllers(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IMapper mapper)
             {
                 _userManger = userManager;
                 _signInManager = signInManager;
                 _configuration = configuration;
+                this.mapper = mapper;
             }
-        
+        [HttpGet("getuser")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<ApplicationUserDTO>> GetUser([FromBody] UserInfoLogin userInfologin)
+        {   
+            var userInfo = new UserInfo();
+            userInfo.Email = userInfologin.Email;
+            userInfo.Password = userInfologin.Password;
+            var user = await _userManger.FindByEmailAsync(userInfo.Email);
+            var userDTO = mapper.Map<ApplicationUserDTO>(user);
+            return userDTO;
+        }
         [HttpPost("Singin")]
         public async Task<ActionResult<UserToken>> CreateUser([FromBody] UserInfo model)
         {
@@ -59,9 +74,10 @@ namespace WebApiWallet.Controllers
             var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Password, isPersistent: true, lockoutOnFailure: false);
             if (result.Succeeded)
             {   
+                var userdto = await GetUser(userInfologin);
                 var user = await _userManger.FindByEmailAsync(userInfo.Email);
                 string userid = user.Id;
-                return BuildToken(userInfo, userid);
+                return new JsonResult( new { Result = BuildToken(userInfo,userid), user = userdto } );    
             }else
             {
                 ModelState.AddModelError(string.Empty, "El usuario o contraseña es incorrecto");

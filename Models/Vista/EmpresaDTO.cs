@@ -20,5 +20,6 @@ namespace WebApiWallet.Models.Vista
         
         //por ver logo
         public CarteraDTO Cartera { get; set; }
+        public int CarteraId { get; set; }
     }
 }

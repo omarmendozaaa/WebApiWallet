@@ -35,7 +35,13 @@ namespace WebApiWallet.Controllers
             var letrasDTO = mapper.Map<List<LetraDTO>>(letras);
             return letrasDTO;
         }
-
+        [HttpGet("bycartera/{id}")]
+        public async Task<ActionResult<IEnumerable<LetraDTO>>> GetByCartera(int id)
+        {
+            var letras = await context.Letras.Where(x  => x.CarteraId == id).ToListAsync();
+            var letrasDTO = mapper.Map<List<LetraDTO>>(letras);
+            return letrasDTO;
+        }
         // GET api/autores/5 
         [HttpGet("{id}", Name = "ObtenerLetras")]
         public async Task<ActionResult<LetraDTO>> Get(int id)

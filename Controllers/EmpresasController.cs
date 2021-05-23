@@ -45,7 +45,15 @@ namespace WebApiWallet.Controllers
             var empresasDTO = mapper.Map<List<EmpresaDTO>>(empresas);
             return empresasDTO;
         }
-
+        [HttpGet("byuser")]
+        public async Task<ActionResult<IEnumerable<EmpresaDTO>>> GetByUser()
+        {
+            string email = User.FindFirst(ClaimTypes.Email)?.Value;
+            var user = await userManager.FindByEmailAsync(email);
+            var empresas = await context.Empresas.Where(x  => x.UsuarioId == user.Id).ToListAsync();
+            var empresasDTO = mapper.Map<List<EmpresaDTO>>(empresas);
+            return empresasDTO;
+        }
         // GET api/autores/5 
         [HttpGet("{id}", Name = "ObtenerEmpresas")]
         public async Task<ActionResult<EmpresaDTO>> Get(int id)

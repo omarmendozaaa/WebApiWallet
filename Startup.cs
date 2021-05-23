@@ -85,6 +85,9 @@ namespace WebApiWallet
                 configuration.CreateMap<Letra,LetraDTO>().ReverseMap();
                 configuration.CreateMap<Recibo,ReciboDTO>().ReverseMap();
                 configuration.CreateMap<Tasa,TasaDTO>().ReverseMap();
+
+                configuration.CreateMap<ApplicationUser, ApplicationUserDTO>();
+                configuration.CreateMap<ApplicationUser, ApplicationUserDTO>().ReverseMap();
 //////////////////////////////////////////////////////////////////////////////////////////////////////
             }, typeof(Startup));
 

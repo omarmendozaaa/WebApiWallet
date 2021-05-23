@@ -15,8 +15,6 @@ namespace WebApiWallet.Models.Vista
         public double retencion { get; set; }
 
         
-
-        public CarteraDTO Cartera { get; set; }
         public TasaDTO Tasa { get; set; }
         public AnalisisDTO Analisis { get; set; }
         public Costos_gastosDTO Costos_gastos { get; set; }
