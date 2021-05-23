@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiWallet.Contexts;
@@ -13,6 +15,7 @@ namespace WebApiWallet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RecibosController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -56,7 +59,7 @@ namespace WebApiWallet.Controllers
             context.Add(recibo);
             await context.SaveChangesAsync();
             var reciboDTO = mapper.Map<ReciboDTO>(recibo);
-            return new CreatedAtRouteResult("ObtenerAutor", new { id = recibo.Id }, reciboDTO);
+            return new CreatedAtRouteResult("ObtenerRecibos", new { id = recibo.Id }, reciboDTO);
         }
 
         // PUT api/autores/5

@@ -20,7 +20,5 @@ namespace WebApiWallet.Entities
         [PesoArchivoValidacion(PesoMaximoEnMegaBytes: 4)]
         [TipoArchivoValidacion(grupoTipoArchivo: GrupoTipoArchivo.Imagen)]
         public IFormFile Logo { get; set; }
-        
-        public CarteraCreacionDTO Cartera { get; set; }
     }
 }

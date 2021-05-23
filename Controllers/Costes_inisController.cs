@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiWallet.Contexts;
@@ -13,6 +15,7 @@ namespace WebApiWallet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class Costes_inisController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -56,7 +59,7 @@ namespace WebApiWallet.Controllers
             context.Add(coste_ini);
             await context.SaveChangesAsync();
             var coste_iniDTO = mapper.Map<Costes_iniDTO>(coste_ini);
-            return new CreatedAtRouteResult("ObtenerAutor", new { id = coste_ini.Id }, coste_iniDTO);
+            return new CreatedAtRouteResult("ObtenerCostes_inis", new { id = coste_ini.Id }, coste_iniDTO);
         }
 
         // PUT api/autores/5

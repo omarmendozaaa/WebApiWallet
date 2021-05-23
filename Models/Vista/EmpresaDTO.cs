@@ -16,6 +16,7 @@ namespace WebApiWallet.Models.Vista
         public string departamento { get; set; }
         public string provincia { get; set; }
         public string distrito { get; set; }
+        public string Logo { get; set; }
         
         //por ver logo
         public CarteraDTO Cartera { get; set; }

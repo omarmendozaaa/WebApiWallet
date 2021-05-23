@@ -20,6 +20,7 @@ using WebApiWallet.Contexts;
 using WebApiWallet.Entities;
 using WebApiWallet.Models;
 using WebApiWallet.Models.Creacion;
+using WebApiWallet.Models.Vista;
 using WebApiWallet.Services;
 
 namespace WebApiWallet
@@ -49,6 +50,8 @@ namespace WebApiWallet
                 configuration.CreateMap<Recibo,ReciboCreacionDTO>();
                 configuration.CreateMap<Tasa,TasaCreacionDTO>();
 
+                configuration.CreateMap<EmpresaCreacionDTO, Empresa>().ForMember(x => x.Logo, options => options.Ignore());
+
                 configuration.CreateMap<Analisis,AnalisisCreacionDTO>().ReverseMap();
                 configuration.CreateMap<Cartera,CarteraCreacionDTO>().ReverseMap();
                 configuration.CreateMap<Costes_fin,Costes_finCreacionDTO>().ReverseMap();
@@ -59,12 +62,36 @@ namespace WebApiWallet
                 configuration.CreateMap<Letra,LetraCreacionDTO>().ReverseMap();
                 configuration.CreateMap<Recibo,ReciboCreacionDTO>().ReverseMap();
                 configuration.CreateMap<Tasa,TasaCreacionDTO>().ReverseMap();
+/////////////////////////////////////////////////////////////////////////////////////////
+                configuration.CreateMap<Analisis,AnalisisDTO>();
+                configuration.CreateMap<Cartera,CarteraDTO>();
+                configuration.CreateMap<Costes_fin,Costes_finDTO>();
+                configuration.CreateMap<Costes_ini,Costes_iniDTO>();
+                configuration.CreateMap<Costos_gastos,Costos_gastosDTO>();
+                configuration.CreateMap<Empresa,EmpresaDTO>();
+                configuration.CreateMap<Factura,FacturaDTO>();
+                configuration.CreateMap<Letra,LetraDTO>();
+                configuration.CreateMap<Recibo,ReciboDTO>();
+                configuration.CreateMap<Tasa,TasaDTO>();
+
+
+                configuration.CreateMap<Analisis,AnalisisDTO>().ReverseMap();
+                configuration.CreateMap<Cartera,CarteraDTO>().ReverseMap();
+                configuration.CreateMap<Costes_fin,Costes_finDTO>().ReverseMap();
+                configuration.CreateMap<Costes_ini,Costes_iniDTO>().ReverseMap();
+                configuration.CreateMap<Costos_gastos,Costos_gastosDTO>().ReverseMap();
+                configuration.CreateMap<Empresa,EmpresaDTO>().ReverseMap();
+                configuration.CreateMap<Factura,FacturaDTO>().ReverseMap();
+                configuration.CreateMap<Letra,LetraDTO>().ReverseMap();
+                configuration.CreateMap<Recibo,ReciboDTO>().ReverseMap();
+                configuration.CreateMap<Tasa,TasaDTO>().ReverseMap();
+//////////////////////////////////////////////////////////////////////////////////////////////////////
             }, typeof(Startup));
 
             services.AddCors();
-            services.AddDbContext<ApplicationSecurityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            // services.AddDbContext<ApplicationSecurityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationSecurityDbContext>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
             services.AddResponseCaching();
 
@@ -82,7 +109,6 @@ namespace WebApiWallet
                     ClockSkew = TimeSpan.Zero
                 }
             );
-        
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             services.AddSwaggerGen(c =>
             {
