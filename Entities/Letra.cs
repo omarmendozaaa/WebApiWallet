@@ -15,12 +15,13 @@ namespace WebApiWallet.Entities
         public double valor_Nom { get; set; }
         public double retencion { get; set; }
 
-        
+
 
         public Cartera Cartera { get; set; }
         public Tasa Tasa { get; set; }
         public Analisis Analisis { get; set; }
         public Costos_gastos Costos_gastos { get; set; }
+        public Cliente Cliente { get; set; }
 
         [Required]
         public int CarteraId { get; set; }
@@ -30,5 +31,7 @@ namespace WebApiWallet.Entities
         public int AnalisisId { get; set; }
         [Required]
         public int Costos_gastosId { get; set; }
+        [Required]
+        public int ClienteId { get; set; }
     }
 }

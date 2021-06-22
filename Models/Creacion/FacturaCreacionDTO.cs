@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using WebApiWallet.Entities;
 
 namespace WebApiWallet.Models.Creacion
 {
@@ -14,13 +15,14 @@ namespace WebApiWallet.Models.Creacion
         public double total_facturado { get; set; }
         [Required]
         public double retencion { get; set; }
+        public int ClienteId { get; set; }
 
-        
+
 
         public CarteraCreacionDTO Cartera { get; set; }
         public TasaCreacionDTO Tasa { get; set; }
         public AnalisisCreacionDTO Analisis { get; set; }
         public Costos_gastosCreacionDTO Costos_gastos { get; set; }
-        
+
     }
 }

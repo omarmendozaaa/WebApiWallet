@@ -38,57 +38,62 @@ namespace WebApiWallet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
-            services.AddAutoMapper( configuration => {
-                configuration.CreateMap<Analisis,AnalisisCreacionDTO>();
-                configuration.CreateMap<Cartera,CarteraCreacionDTO>();
-                configuration.CreateMap<Costes_fin,Costes_finCreacionDTO>();
-                configuration.CreateMap<Costes_ini,Costes_iniCreacionDTO>();
-                configuration.CreateMap<Costos_gastos,Costos_gastosCreacionDTO>();
-                configuration.CreateMap<Empresa,EmpresaCreacionDTO>();
-                configuration.CreateMap<Factura,FacturaCreacionDTO>();
-                configuration.CreateMap<Letra,LetraCreacionDTO>();
-                configuration.CreateMap<Recibo,ReciboCreacionDTO>();
-                configuration.CreateMap<Tasa,TasaCreacionDTO>();
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<Analisis, AnalisisCreacionDTO>();
+                configuration.CreateMap<Cartera, CarteraCreacionDTO>();
+                configuration.CreateMap<Costes_fin, Costes_finCreacionDTO>();
+                configuration.CreateMap<Costes_ini, Costes_iniCreacionDTO>();
+                configuration.CreateMap<Costos_gastos, Costos_gastosCreacionDTO>();
+                configuration.CreateMap<Empresa, EmpresaCreacionDTO>();
+                configuration.CreateMap<Factura, FacturaCreacionDTO>();
+                configuration.CreateMap<Letra, LetraCreacionDTO>();
+                configuration.CreateMap<Recibo, ReciboCreacionDTO>();
+                configuration.CreateMap<Tasa, TasaCreacionDTO>();
+                configuration.CreateMap<Cliente, ClienteCreacionDTO>();
 
                 configuration.CreateMap<EmpresaCreacionDTO, Empresa>().ForMember(x => x.Logo, options => options.Ignore());
 
-                configuration.CreateMap<Analisis,AnalisisCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Cartera,CarteraCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Costes_fin,Costes_finCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Costes_ini,Costes_iniCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Costos_gastos,Costos_gastosCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Empresa,EmpresaCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Factura,FacturaCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Letra,LetraCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Recibo,ReciboCreacionDTO>().ReverseMap();
-                configuration.CreateMap<Tasa,TasaCreacionDTO>().ReverseMap();
-/////////////////////////////////////////////////////////////////////////////////////////
-                configuration.CreateMap<Analisis,AnalisisDTO>();
-                configuration.CreateMap<Cartera,CarteraDTO>();
-                configuration.CreateMap<Costes_fin,Costes_finDTO>();
-                configuration.CreateMap<Costes_ini,Costes_iniDTO>();
-                configuration.CreateMap<Costos_gastos,Costos_gastosDTO>();
-                configuration.CreateMap<Empresa,EmpresaDTO>();
-                configuration.CreateMap<Factura,FacturaDTO>();
-                configuration.CreateMap<Letra,LetraDTO>();
-                configuration.CreateMap<Recibo,ReciboDTO>();
-                configuration.CreateMap<Tasa,TasaDTO>();
+                configuration.CreateMap<Analisis, AnalisisCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Cartera, CarteraCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costes_fin, Costes_finCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costes_ini, Costes_iniCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Costos_gastos, Costos_gastosCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Empresa, EmpresaCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Factura, FacturaCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Letra, LetraCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Recibo, ReciboCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Tasa, TasaCreacionDTO>().ReverseMap();
+                configuration.CreateMap<Cliente, ClienteCreacionDTO>().ReverseMap();
+                /////////////////////////////////////////////////////////////////////////////////////////
+                configuration.CreateMap<Analisis, AnalisisDTO>();
+                configuration.CreateMap<Cartera, CarteraDTO>();
+                configuration.CreateMap<Costes_fin, Costes_finDTO>();
+                configuration.CreateMap<Costes_ini, Costes_iniDTO>();
+                configuration.CreateMap<Costos_gastos, Costos_gastosDTO>();
+                configuration.CreateMap<Empresa, EmpresaDTO>();
+                configuration.CreateMap<Factura, FacturaDTO>();
+                configuration.CreateMap<Letra, LetraDTO>();
+                configuration.CreateMap<Recibo, ReciboDTO>();
+                configuration.CreateMap<Tasa, TasaDTO>();
+                configuration.CreateMap<Cliente, ClienteDTO>();
 
 
-                configuration.CreateMap<Analisis,AnalisisDTO>().ReverseMap();
-                configuration.CreateMap<Cartera,CarteraDTO>().ReverseMap();
-                configuration.CreateMap<Costes_fin,Costes_finDTO>().ReverseMap();
-                configuration.CreateMap<Costes_ini,Costes_iniDTO>().ReverseMap();
-                configuration.CreateMap<Costos_gastos,Costos_gastosDTO>().ReverseMap();
-                configuration.CreateMap<Empresa,EmpresaDTO>().ReverseMap();
-                configuration.CreateMap<Factura,FacturaDTO>().ReverseMap();
-                configuration.CreateMap<Letra,LetraDTO>().ReverseMap();
-                configuration.CreateMap<Recibo,ReciboDTO>().ReverseMap();
-                configuration.CreateMap<Tasa,TasaDTO>().ReverseMap();
+                configuration.CreateMap<Analisis, AnalisisDTO>().ReverseMap();
+                configuration.CreateMap<Cartera, CarteraDTO>().ReverseMap();
+                configuration.CreateMap<Costes_fin, Costes_finDTO>().ReverseMap();
+                configuration.CreateMap<Costes_ini, Costes_iniDTO>().ReverseMap();
+                configuration.CreateMap<Costos_gastos, Costos_gastosDTO>().ReverseMap();
+                configuration.CreateMap<Empresa, EmpresaDTO>().ReverseMap();
+                configuration.CreateMap<Factura, FacturaDTO>().ReverseMap();
+                configuration.CreateMap<Letra, LetraDTO>().ReverseMap();
+                configuration.CreateMap<Recibo, ReciboDTO>().ReverseMap();
+                configuration.CreateMap<Tasa, TasaDTO>().ReverseMap();
+                configuration.CreateMap<Cliente, ClienteDTO>().ReverseMap();
 
                 configuration.CreateMap<ApplicationUser, ApplicationUserDTO>();
                 configuration.CreateMap<ApplicationUser, ApplicationUserDTO>().ReverseMap();
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////
             }, typeof(Startup));
 
             services.AddCors();
@@ -100,7 +105,7 @@ namespace WebApiWallet
 
             services.AddCors(options => { options.AddPolicy("All", builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*")); });
             services.AddControllers();
-            
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
                 options => options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -118,11 +123,11 @@ namespace WebApiWallet
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiWallet", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
-                        Name = "Authorization",
-                        In = ParameterLocation.Header,
-                        Type = SecuritySchemeType.ApiKey,
-                        Scheme = "tomsAuth"
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "tomsAuth"
                 });
             });
         }
@@ -136,7 +141,7 @@ namespace WebApiWallet
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiWallet v1"));
             }
-
+            app.UseCors("All");
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -149,7 +154,6 @@ namespace WebApiWallet
             });
             app.UseResponseCaching();
             app.UseAuthentication();
-            app.UseCors("All");
         }
     }
 }

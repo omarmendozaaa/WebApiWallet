@@ -2,12 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiWallet.Models;
 using WebApiWallet.Validations;
 
-namespace WebApiWallet.Models.Vista
+namespace WebApiWallet.Entities
 {
-    public class EmpresaDTO
+    public class Cliente
     {
+        public int Id { get; set; }
         public string ruc { get; set; }
         [Required]
         public string razonSocial { get; set; }
@@ -17,8 +19,10 @@ namespace WebApiWallet.Models.Vista
         public string provincia { get; set; }
         public string distrito { get; set; }
         public string Logo { get; set; }
+        [Phone]
+        public string contacto { get; set; }
+        public string UsuarioId { get; set; }
+        public ApplicationUser Usuario { get; set; }
 
-        public CarteraDTO Cartera { get; set; }
-        public int CarteraId { get; set; }
     }
 }

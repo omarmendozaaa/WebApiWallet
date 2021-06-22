@@ -6,10 +6,9 @@ using WebApiWallet.Validations;
 
 namespace WebApiWallet.Models.Vista
 {
-    public class EmpresaDTO
+    public class ClienteDTO
     {
         public string ruc { get; set; }
-        [Required]
         public string razonSocial { get; set; }
         public string estado { get; set; }
         public string direccion { get; set; }
@@ -18,7 +17,5 @@ namespace WebApiWallet.Models.Vista
         public string distrito { get; set; }
         public string Logo { get; set; }
 
-        public CarteraDTO Cartera { get; set; }
-        public int CarteraId { get; set; }
     }
 }

@@ -84,7 +84,7 @@ namespace WebApiWallet.Controllers
                 return NotFound();
             }
 
-            context.Remove(new Analisis { Id = analisisid});
+            context.Remove(new Analisis { Id = analisisid });
             await context.SaveChangesAsync();
             return NoContent();
         }

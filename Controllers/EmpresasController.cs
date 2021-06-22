@@ -50,7 +50,7 @@ namespace WebApiWallet.Controllers
         {
             string email = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = await userManager.FindByEmailAsync(email);
-            var empresas = await context.Empresas.Where(x  => x.UsuarioId == user.Id).ToListAsync();
+            var empresas = await context.Empresas.Where(x => x.UsuarioId == user.Id).ToListAsync();
             var empresasDTO = mapper.Map<List<EmpresaDTO>>(empresas);
             return empresasDTO;
         }
@@ -72,33 +72,38 @@ namespace WebApiWallet.Controllers
         // POST api/autores
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] EmpresaCreacionDTO empresaCreacion)
-        {   
-            if (User.Identity.IsAuthenticated){
-            var carteraCreacion = new CarteraCreacionDTO();
-            var cartera = mapper.Map<Cartera>(carteraCreacion);
-            context.Add(cartera);
-            await context.SaveChangesAsync();
-            var empresa = mapper.Map<Empresa>(empresaCreacion);
-            string email = User.FindFirst(ClaimTypes.Email)?.Value;
-            var user = await userManager.FindByEmailAsync(email);
-            empresa.UsuarioId = user.Id.ToString();
-            if(empresaCreacion.Logo != null){
-                using (var memoryStream = new MemoryStream()){
-                    await empresaCreacion.Logo.CopyToAsync(memoryStream);
-                    var contenido = memoryStream.ToArray();
-                    var extension = Path.GetExtension(empresaCreacion.Logo.FileName);
-                    empresa.Logo = await almacenadorArchivos.GuardarArchivo(contenido,extension,contenedor,empresaCreacion.Logo.ContentType);
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var carteraCreacion = new CarteraCreacionDTO();
+                var cartera = mapper.Map<Cartera>(carteraCreacion);
+                context.Add(cartera);
+                await context.SaveChangesAsync();
+                var empresa = mapper.Map<Empresa>(empresaCreacion);
+                string email = User.FindFirst(ClaimTypes.Email)?.Value;
+                var user = await userManager.FindByEmailAsync(email);
+                empresa.UsuarioId = user.Id.ToString();
+                if (empresaCreacion.Logo != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await empresaCreacion.Logo.CopyToAsync(memoryStream);
+                        var contenido = memoryStream.ToArray();
+                        var extension = Path.GetExtension(empresaCreacion.Logo.FileName);
+                        empresa.Logo = await almacenadorArchivos.GuardarArchivo(contenido, extension, contenedor, empresaCreacion.Logo.ContentType);
+                    }
                 }
+                empresa.CarteraId = cartera.Id;
+                context.Add(empresa);
+                await context.SaveChangesAsync();
+                var empresaDTO = mapper.Map<EmpresaDTO>(empresa);
+                return new CreatedAtRouteResult("ObtenerEmpresas", new { id = empresa.Id }, empresaDTO);
             }
-            empresa.CarteraId = cartera.Id;
-            context.Add(empresa);
-            await context.SaveChangesAsync();
-            var empresaDTO = mapper.Map<EmpresaDTO>(empresa);
-            return new CreatedAtRouteResult("ObtenerEmpresas", new { id = empresa.Id }, empresaDTO);
-        }else{
-            return BadRequest("El inicio  de sesión expiró");
-        }
-            
+            else
+            {
+                return BadRequest("El inicio  de sesión expiró");
+            }
+
         }
 
         // PUT api/autores/5
@@ -107,16 +112,19 @@ namespace WebApiWallet.Controllers
         {
             var empresaDb = await context.Empresas.FirstOrDefaultAsync(x => x.Id == id);
 
-            if(empresaDb == null){
+            if (empresaDb == null)
+            {
                 return NotFound();
             }
             empresaDb = mapper.Map(empresaActualizacion, empresaDb);
-            if(empresaActualizacion.Logo != null){
-                using (var memoryStream = new MemoryStream()){
+            if (empresaActualizacion.Logo != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
                     await empresaActualizacion.Logo.CopyToAsync(memoryStream);
                     var contenido = memoryStream.ToArray();
                     var extension = Path.GetExtension(empresaActualizacion.Logo.FileName);
-                    empresaDb.Logo = await almacenadorArchivos.EditarArchivo(contenido,extension,contenedor,empresaDb.Logo,empresaActualizacion.Logo.ContentType);
+                    empresaDb.Logo = await almacenadorArchivos.EditarArchivo(contenido, extension, contenedor, empresaDb.Logo, empresaActualizacion.Logo.ContentType);
                 }
             }
             await context.SaveChangesAsync();
@@ -134,7 +142,7 @@ namespace WebApiWallet.Controllers
                 return NotFound();
             }
 
-            context.Remove(new Empresa { Id = empresaid});
+            context.Remove(new Empresa { Id = empresaid });
             await context.SaveChangesAsync();
             return NoContent();
         }

@@ -13,6 +13,7 @@ namespace WebApiWallet.Models.Creacion
         [Required]
         public double valor_Nom { get; set; }
         public double retencion { get; set; }
+        public int ClienteId { get; set; }
 
         public CarteraCreacionDTO Cartera { get; set; }
         public TasaCreacionDTO Tasa { get; set; }

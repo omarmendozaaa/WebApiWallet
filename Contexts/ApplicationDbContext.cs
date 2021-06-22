@@ -21,6 +21,7 @@ namespace WebApiWallet.Contexts
         public DbSet<Recibo> Recibos { get; set; }
         public DbSet<Tasa> Tasas { get; set; }
         public DbSet<Analisis> Analisis { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
     }
 }
