@@ -9,7 +9,5 @@ namespace WebApiWallet.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Empresa Empresas { get; set; }
-        public List<Cliente> Clientes { get; set; }
     }
 }

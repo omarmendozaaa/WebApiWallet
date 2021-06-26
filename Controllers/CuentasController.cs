@@ -1,4 +1,3 @@
-
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -44,7 +43,6 @@ namespace WebApiWallet.Controllers
             {
                 string email = User.FindFirst(ClaimTypes.Email)?.Value;
                 var user = await _userManger.FindByEmailAsync(email);
-                var userInfo = new UserInfo();
                 var userDTO = mapper.Map<ApplicationUserDTO>(user);
                 return userDTO;
             }

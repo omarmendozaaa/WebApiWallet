@@ -5,8 +5,9 @@ namespace WebApiWallet.Models.Vista
 {
     public class CarteraDTO
     {
-        public float TCEA { get; set; }
-        public float TIR { get; set; }
+        public List<FacturaDTO> Facturas { get; set; }
+        public List<ReciboDTO> Recibos { get; set; }
+        public List<LetraDTO> Letras { get; set; }
 
     }
 }

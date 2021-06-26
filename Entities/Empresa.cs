@@ -19,11 +19,11 @@ namespace WebApiWallet.Entities
         public string provincia { get; set; }
         public string distrito { get; set; }
         public string Logo { get; set; }
-        
+
         public int CarteraId { get; set; }
         public Cartera Cartera { get; set; }
         public string UsuarioId { get; set; }
         public ApplicationUser Usuario { get; set; }
-   
+
     }
 }

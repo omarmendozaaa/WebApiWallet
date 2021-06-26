@@ -46,13 +46,13 @@ namespace WebApiWallet.Controllers
             return empresasDTO;
         }
         [HttpGet("byuser")]
-        public async Task<ActionResult<IEnumerable<EmpresaDTO>>> GetByUser()
+        public async Task<ActionResult<EmpresaDTO>> GetByUser()
         {
             string email = User.FindFirst(ClaimTypes.Email)?.Value;
             var user = await userManager.FindByEmailAsync(email);
-            var empresas = await context.Empresas.Where(x => x.UsuarioId == user.Id).ToListAsync();
-            var empresasDTO = mapper.Map<List<EmpresaDTO>>(empresas);
-            return empresasDTO;
+            var empresa = await context.Empresas.FirstOrDefaultAsync(x => x.UsuarioId == user.Id);
+            var empresaDTO = mapper.Map<EmpresaDTO>(empresa);
+            return empresaDTO;
         }
         // GET api/autores/5 
         [HttpGet("{id}", Name = "ObtenerEmpresas")]
@@ -71,7 +71,7 @@ namespace WebApiWallet.Controllers
         }
         // POST api/autores
         [HttpPost]
-        public async Task<ActionResult> Post([FromForm] EmpresaCreacionDTO empresaCreacion)
+        public async Task<ActionResult> Post([FromBody] EmpresaCreacionDTO empresaCreacion)
         {
             if (User.Identity.IsAuthenticated)
             {
