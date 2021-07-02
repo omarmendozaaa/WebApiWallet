@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using WebApiWallet.Contexts;
 using WebApiWallet.Models;
 using WebApiWallet.Models.Vista;
 
@@ -19,18 +21,21 @@ namespace WebApiWallet.Controllers
     [Route("[controller]")]
     public class CuentasControllers : ControllerBase
     {
+        private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper mapper;
 
         public CuentasControllers(
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration,
             IMapper mapper)
         {
             _userManger = userManager;
+            this.context = context;
             _signInManager = signInManager;
             _configuration = configuration;
             this.mapper = mapper;
@@ -43,8 +48,20 @@ namespace WebApiWallet.Controllers
             {
                 string email = User.FindFirst(ClaimTypes.Email)?.Value;
                 var user = await _userManger.FindByEmailAsync(email);
-                var userDTO = mapper.Map<ApplicationUserDTO>(user);
-                return userDTO;
+                var empresa = await context.Empresas.FirstOrDefaultAsync(x => x.UsuarioId == user.Id);
+                if (empresa == null)
+                {
+                    var userDTO = mapper.Map<ApplicationUserDTO>(user);
+                    return userDTO;
+                }
+                else
+                {
+                    var userDTOwithempres = mapper.Map<ApplicationUserDTO>(user);
+                    userDTOwithempres.EmpresaId = empresa.Id;
+                    userDTOwithempres.CarteraId = empresa.CarteraId;
+                    return userDTOwithempres;
+                }
+
             }
             else
             {

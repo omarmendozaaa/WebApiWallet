@@ -7,9 +7,6 @@ namespace WebApiWallet.Models.Creacion
     {
         [Required]
         public string motivo { get; set; }
-        [Required]
-        public string tipo_valor { get; set; }
-        [Required]
         public double valor { get; set; }
 
     }

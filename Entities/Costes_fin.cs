@@ -8,9 +8,6 @@ namespace WebApiWallet.Entities
         public int Id { get; set; }
         [Required]
         public string motivo { get; set; }
-        [Required]
-        public string tipo_valor { get; set; }
-        [Required]
         public double valor { get; set; }
 
 

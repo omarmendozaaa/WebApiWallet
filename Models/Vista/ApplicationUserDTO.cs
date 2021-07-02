@@ -9,6 +9,7 @@ namespace WebApiWallet.Models.Vista
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public int EmpresaId { get; set; }
+        public int CarteraId { get; set; }
     }
 }

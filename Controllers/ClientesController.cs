@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,8 @@ using WebApiWallet.Contexts;
 using WebApiWallet.Entities;
 using WebApiWallet.Models.Creacion;
 using WebApiWallet.Models.Vista;
+using Microsoft.AspNetCore.Identity;
+using WebApiWallet.Models;
 
 namespace WebApiWallet.Controllers
 {
@@ -20,9 +23,11 @@ namespace WebApiWallet.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ClientesController(ApplicationDbContext context, IMapper mapper)
+        public ClientesController(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
+            this.userManager = userManager;
             this.context = context;
             this.mapper = mapper;
         }
@@ -35,7 +40,22 @@ namespace WebApiWallet.Controllers
             var clientesDTO = mapper.Map<List<ClienteDTO>>(clientes);
             return clientesDTO;
         }
-
+        [HttpGet("byuser")]
+        public async Task<ActionResult<IEnumerable<ClienteDTO>>> GetByUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string email = User.FindFirst(ClaimTypes.Email)?.Value;
+                var user = await userManager.FindByEmailAsync(email);
+                var clientes = await context.Clientes.Where(x => x.UsuarioId == user.Id).ToListAsync();
+                var clientesDTO = mapper.Map<List<ClienteDTO>>(clientes);
+                return clientesDTO;
+            }
+            else
+            {
+                return BadRequest("No permitido");
+            }
+        }
         // GET api/autores/5 
         [HttpGet("{id}", Name = "ObtenerClientes")]
         public async Task<ActionResult<ClienteDTO>> Get(int id)
@@ -55,11 +75,22 @@ namespace WebApiWallet.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ClienteCreacionDTO clienteCreacion)
         {
-            var cliente = mapper.Map<Cliente>(clienteCreacion);
-            context.Add(cliente);
-            await context.SaveChangesAsync();
-            var clienteDTO = mapper.Map<ClienteDTO>(cliente);
-            return new CreatedAtRouteResult("ObtenerClientes", new { id = cliente.Id }, clienteDTO);
+            if (User.Identity.IsAuthenticated)
+            {
+                string email = User.FindFirst(ClaimTypes.Email)?.Value;
+                var user = await userManager.FindByEmailAsync(email);
+                var cliente = mapper.Map<Cliente>(clienteCreacion);
+                cliente.UsuarioId = user.Id;
+                context.Add(cliente);
+                await context.SaveChangesAsync();
+                var clienteDTO = mapper.Map<ClienteDTO>(cliente);
+                return new CreatedAtRouteResult("ObtenerClientes", new { id = cliente.Id }, clienteDTO);
+            }
+            else
+            {
+                return BadRequest("No permitido");
+            }
+
         }
 
         // PUT api/autores/5

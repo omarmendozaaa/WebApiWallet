@@ -38,7 +38,7 @@ namespace WebApiWallet.Controllers
         [HttpGet("bycartera/{id}")]
         public async Task<ActionResult<IEnumerable<FacturaDTO>>> GetByCartera(int id)
         {
-            var facturas = await context.Facturas.Where(x  => x.CarteraId == id).ToListAsync();
+            var facturas = await context.Facturas.Where(x => x.CarteraId == id).ToListAsync();
             var facturasDTO = mapper.Map<List<FacturaDTO>>(facturas);
             return facturasDTO;
         }
@@ -90,7 +90,7 @@ namespace WebApiWallet.Controllers
                 return NotFound();
             }
 
-            context.Remove(new Factura { Id = facturaid});
+            context.Remove(new Factura { Id = facturaid });
             await context.SaveChangesAsync();
             return NoContent();
         }
